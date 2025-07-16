@@ -40,6 +40,8 @@ cd frontend/
 npm install
 npm run dev
 ```
+The frontend is built with Vite and React. After installing dependencies,
+the development server will be available at `http://localhost:5173` by default.
 
 ## Suggested UI Structure
 
