@@ -1,0 +1,82 @@
+[
+  {
+    "ship_id": "A001",
+    "expected_eta": "2024-07-20T10:00:00Z",
+    "actual_eta": "2024-07-20T12:30:00Z",
+    "origin": "Dublin",
+    "destination": "Hamburg",
+    "weather": {"wind_speed": 30, "conditions": "Clear"}
+  },
+  {
+    "ship_id": "A002",
+    "expected_eta": "2024-07-21T15:00:00Z",
+    "actual_eta": "2024-07-21T14:50:00Z",
+    "origin": "Liverpool",
+    "destination": "Rotterdam",
+    "weather": {"wind_speed": 20, "conditions": "Rain"}
+  },
+  {
+    "ship_id": "A003",
+    "expected_eta": "2024-07-22T09:00:00Z",
+    "actual_eta": "2024-07-22T09:05:00Z",
+    "origin": "Cork",
+    "destination": "Oslo",
+    "weather": {"wind_speed": 15, "conditions": "Fog"}
+  },
+  {
+    "ship_id": "A004",
+    "expected_eta": "2024-07-23T18:30:00Z",
+    "actual_eta": "2024-07-23T22:10:00Z",
+    "origin": "Brest",
+    "destination": "Gothenburg",
+    "weather": {"wind_speed": 50, "conditions": "Storm"}
+  },
+  {
+    "ship_id": "A005",
+    "expected_eta": "2024-07-24T11:45:00Z",
+    "actual_eta": "2024-07-24T11:40:00Z",
+    "origin": "Le Havre",
+    "destination": "Stockholm",
+    "weather": {"wind_speed": 12, "conditions": "Clear"}
+  },
+  {
+    "ship_id": "A006",
+    "expected_eta": "2024-07-25T07:30:00Z",
+    "actual_eta": "2024-07-25T08:15:00Z",
+    "origin": "Bilbao",
+    "destination": "Tallinn",
+    "weather": {"wind_speed": 40, "conditions": "Windy"}
+  },
+  {
+    "ship_id": "A007",
+    "expected_eta": "2024-07-26T13:20:00Z",
+    "actual_eta": "2024-07-26T13:25:00Z",
+    "origin": "Amsterdam",
+    "destination": "Copenhagen",
+    "weather": {"wind_speed": 18, "conditions": "Cloudy"}
+  },
+  {
+    "ship_id": "A008",
+    "expected_eta": "2024-07-27T16:40:00Z",
+    "actual_eta": "2024-07-27T20:00:00Z",
+    "origin": "Antwerp",
+    "destination": "Riga",
+    "weather": {"wind_speed": 55, "conditions": "Storm"}
+  },
+  {
+    "ship_id": "A009",
+    "expected_eta": "2024-07-28T21:00:00Z",
+    "actual_eta": "2024-07-28T21:10:00Z",
+    "origin": "London",
+    "destination": "St Petersburg",
+    "weather": {"wind_speed": 25, "conditions": "Rain"}
+  },
+  {
+    "ship_id": "A010",
+    "expected_eta": "2024-07-29T05:00:00Z",
+    "actual_eta": "2024-07-29T04:50:00Z",
+    "origin": "Lisbon",
+    "destination": "Gdansk",
+    "weather": {"wind_speed": 10, "conditions": "Clear"}
+  }
+]

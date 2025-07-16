@@ -18,7 +18,7 @@ The system automates insurance payouts for delayed freight shipments or risky we
 | Agentic AI     | Python (FastAPI + scheduler)   |
 | Frontend       | React + Vite                   |
 | Blockchain     | Stellar Testnet + Soroban      |
-| Data Sources   | Met Eireann, mock shipping ETA |
+| Data Sources   | Met Eireann, `data/mock_freight_data.json` |
 
 ---
 
@@ -56,9 +56,19 @@ parametric-insurance/
 ├── frontend/ # React UI with live alerts  
 │   └── components/
 │   └── pages/
-├── data/ # Sample freight data  
+├── data/
+│   └── mock_freight_data.json # sample shipping records
 ├── .env                  # API keys
 └── README.md # Project overview
+
+The agents load this dataset using the Python `json` module:
+
+```python
+import json
+
+with open("data/mock_freight_data.json") as f:
+    FREIGHT_DATA = json.load(f)  # list of ship records
+```
 
 ---
 
@@ -66,7 +76,7 @@ parametric-insurance/
 
 1. **User** enters policy in React UI → POSTs to Python backend → Python calls `init_policy` on Soroban.
 
-2. **Python Agent** fetches weather & mock freight data every 10 minutes.
+2. **Python Agent** fetches weather data and loads freight records from `data/mock_freight_data.json` every 10 minutes.
 
 3. **Evaluator Agent** checks for:
    
