@@ -84,3 +84,17 @@ async def manual_check() -> Dict:
     # monitor() performs I/O and CPU work; offload to a thread to keep FastAPI async
     await asyncio.to_thread(monitor)
     return {"checked": True}
+
+
+@app.get("/txlog")
+async def tx_log() -> List[Dict]:
+    """Expose transaction history."""
+    return _trigger.tx_log
+
+
+@app.post("/batch-payout")
+async def batch_payout() -> Dict:
+    """Run payout for all eligible policies."""
+    records = _data_agent.fetch_latest()
+    processed = _trigger.trigger_batch_payout(records)
+    return {"processed": processed}
