@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, Env, Address, BytesN, Symbol};
+use soroban_sdk::{contract, contractimpl, contracttype, Env, Address, BytesN};
 
 #[contract]
 pub struct FreightInsurance;
