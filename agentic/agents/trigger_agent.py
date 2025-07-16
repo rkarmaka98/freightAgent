@@ -2,13 +2,13 @@
 
 import os
 from typing import Dict
-
+from typing import Optional
 import requests
 
 class TriggerAgent:
     """Invoke the `check_and_payout` method on-chain."""
 
-    def __init__(self, rpc_url: str | None = None, contract_id: str | None = None) -> None:
+    def __init__(self, rpc_url: Optional[str] = None, contract_id: Optional[str] = None) -> None:
         # RPC endpoint for the Soroban network
         self.rpc_url = rpc_url or os.getenv("SOROBAN_RPC_URL", "http://localhost:8000")
         # Contract ID deployed on the network

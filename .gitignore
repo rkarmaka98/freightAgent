@@ -1,10 +1,11 @@
 # Python artifacts
 __pycache__/
 venv
+.env
 
 # Rust build directory
 target/
-contracts/.stellar
+.stellar
 
 # Node dependencies
 node_modules/
