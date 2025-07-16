@@ -1,0 +1,9 @@
+# Python artifacts
+__pycache__/
+.env
+
+# Rust build directory
+target/
+
+# Node dependencies
+node_modules/
