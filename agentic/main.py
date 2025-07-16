@@ -13,6 +13,9 @@ DATA_PATH = "../data/mock_freight_data.json"
 
 app = FastAPI(title="Freight Insurance Agentic API")
 
+# Module-level scheduler so it can be reused across events
+scheduler = BackgroundScheduler()
+
 # Initialize agents
 _data_agent = DataAgent(DATA_PATH)
 _evaluator = EvaluatorAgent()
@@ -39,9 +42,15 @@ def monitor() -> None:
 @app.on_event("startup")
 def start_scheduler() -> None:
     """Launch background scheduler when the app starts."""
-    scheduler = BackgroundScheduler()
+    # Use the module-level scheduler defined above
     scheduler.add_job(monitor, "interval", minutes=10)
     scheduler.start()
+
+
+@app.on_event("shutdown")
+def shutdown_scheduler() -> None:
+    """Shut down the scheduler gracefully on shutdown."""
+    scheduler.shutdown()
 
 
 @app.post("/policy")
