@@ -8,7 +8,7 @@ This Python app runs an agentic AI workflow that monitors real-time shipping dat
 
 | Agent           | Task Description                                                                    |
 | --------------- | ----------------------------------------------------------------------------------- |
-| Data Agent      | Pull ETA and weather(Met Éireann) every 10 mins                                     |
+| Data Agent      | Load `../data/mock_freight_data.json` and pull weather (Met Éireann) every 10 mins |
 | Evaluator Agent | Evaluate if delay(actual vs declared) or weather breaches thresholds                |
 | Trigger Agent   | Call `check_and_payout()` on-chain when breached (delay > X hours or storm warning) |
 | Logger Agent    | Persist decision logs to file with alerts                                           |
@@ -20,7 +20,15 @@ This Python app runs an agentic AI workflow that monitors real-time shipping dat
 
 - **Weather**: Met Éireann (`wind_speed`, `storm`, `rain`)
 
-- **ETA**: mock data (Hardcode 3 ships: `ship_id = X` Each has: expected ETA + actual arrival (manually simulate delay))
+- **ETA**: sample shipping records stored in [`../data/mock_freight_data.json`](../data/mock_freight_data.json)
+
+```python
+# data_agent.py snippet
+import json
+
+with open("../data/mock_freight_data.json") as f:
+    FREIGHT_DATA = json.load(f)  # list of ship records
+```
 
 ---
 
