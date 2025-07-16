@@ -4,6 +4,7 @@ venv
 
 # Rust build directory
 target/
+contracts/.stellar
 
 # Node dependencies
 node_modules/

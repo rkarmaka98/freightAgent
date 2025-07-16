@@ -17,7 +17,6 @@ pub enum DataKey {
 
 #[contractimpl]
 impl FreightInsurance {
-    /// Initialize a new policy with expected arrival time and payout details
     pub fn init_policy(
         env: Env,
         ship_id: BytesN<32>,
@@ -26,53 +25,37 @@ impl FreightInsurance {
         owner: Address,
         payout_amount: i128,
     ) {
-        // Store policy details in contract storage
-        env.storage().set(&DataKey::ExpectedEta(ship_id.clone()), &expected_eta);
-        env.storage().set(&DataKey::DelayThreshold(ship_id.clone()), &threshold_hours);
-        env.storage().set(&DataKey::Owner(ship_id.clone()), &owner);
-        env.storage().set(&DataKey::PayoutAmount(ship_id.clone()), &payout_amount);
-        env.storage().set(&DataKey::PayoutDone(ship_id.clone()), &false);
+        let p = env.storage().persistent();
+        p.set(&DataKey::ExpectedEta(ship_id.clone()), &expected_eta);
+        p.set(&DataKey::DelayThreshold(ship_id.clone()), &threshold_hours);
+        p.set(&DataKey::Owner(ship_id.clone()), &owner);
+        p.set(&DataKey::PayoutAmount(ship_id.clone()), &payout_amount);
+        p.set(&DataKey::PayoutDone(ship_id), &false);
     }
 
-    /// Register the actual arrival time and optional wind speed reading
-    pub fn register_actual_arrival(
-        env: Env,
-        ship_id: BytesN<32>,
-        actual_eta: u64,
-        _wind_speed: Option<u32>,
-    ) {
-        // Save actual arrival time for the ship
-        env.storage().set(&DataKey::ActualEta(ship_id), &actual_eta);
-    }
-
-    /// Check if the delay exceeds the threshold and payout if necessary
     pub fn check_and_payout(env: Env, ship_id: BytesN<32>) -> bool {
-        // Fetch stored info
-        let expected: u64 = env.storage().get_unchecked(&DataKey::ExpectedEta(ship_id.clone())).unwrap();
-        let actual: u64 = env.storage().get_unchecked(&DataKey::ActualEta(ship_id.clone())).unwrap_or(0);
-        let threshold: u64 = env.storage().get_unchecked(&DataKey::DelayThreshold(ship_id.clone())).unwrap();
-        let done: bool = env.storage().get_unchecked(&DataKey::PayoutDone(ship_id.clone())).unwrap_or(false);
+        let p = env.storage().persistent();
+        let expected: u64 = p.get(&DataKey::ExpectedEta(ship_id.clone())).unwrap();
+        let actual: u64 = p.get(&DataKey::ActualEta(ship_id.clone())).unwrap_or(0);
+        let threshold: u64 = p.get(&DataKey::DelayThreshold(ship_id.clone())).unwrap();
+        let done: bool = p.get(&DataKey::PayoutDone(ship_id.clone())).unwrap_or(false);
 
-        // Only payout once
         if done || actual == 0 {
             return false;
         }
-
-        // Compute delay
-        let delay_hours = if actual > expected { (actual - expected) / 3600 } else { 0 };
+        let delay_hours = (actual.saturating_sub(expected)) / 3600;
         if delay_hours >= threshold {
-            // Transfer tokens - placeholder logic
-            env.storage().set(&DataKey::PayoutDone(ship_id.clone()), &true);
+            p.set(&DataKey::PayoutDone(ship_id), &true);
             return true;
         }
         false
     }
 
-    /// Return current policy status: 0 = Active, 1 = Triggered, 2 = Settled
     pub fn get_policy_status(env: Env, ship_id: BytesN<32>) -> u32 {
-        let payout_done: bool = env.storage().get_unchecked(&DataKey::PayoutDone(ship_id.clone())).unwrap_or(false);
-        let actual_exists: bool = env.storage().has(&DataKey::ActualEta(ship_id.clone()));
-        if payout_done {
+        let p = env.storage().persistent();
+        let done = p.get(&DataKey::PayoutDone(ship_id.clone())).unwrap_or(false);
+        let actual_exists = p.has(&DataKey::ActualEta(ship_id));
+        if done {
             2
         } else if actual_exists {
             1
