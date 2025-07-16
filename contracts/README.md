@@ -9,7 +9,7 @@ This Soroban smart contract manages insurance policy creation, monitoring, and p
 | Function              | Purpose                                                              |
 | --------------------- | -------------------------------------------------------------------- |
 | `init_policy()`       | Create and store a new insurance policy                              |
-| `register_arrival()`  | Log the actual arrival and compute delay + conditions                |
+| `register_actual_arrival()` | Store the actual arrival time and trigger payout check |
 | `check_and_payout()`  | Trigger payout if delay threshold met, auto-payout in testnet tokens |
 | `get_policy_status()` | Query policy state: Active, Triggered                                |
 
@@ -34,7 +34,7 @@ Map<ship_id => payout_amount>
 
 2. <u>**Register Arrival**</u>
 
-`register_actual_arrival(   ship_id: BytesN<32>,   actual_eta: u64,   wind_speed: Option<u32> )`
+`register_actual_arrival(ship_id: BytesN<32>, actual_eta: u64)`
 
 3. <u>**Check & Payout**</u>
 

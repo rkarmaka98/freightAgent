@@ -83,7 +83,7 @@ with open("data/mock_freight_data.json") as f:
 
 1. **User** enters policy in React UI → POSTs to Python backend → Python calls `init_policy` on Soroban.
 
-2. **Python Agent** fetches weather data and loads freight records from `data/mock_freight_data.json` every 10 minutes.
+2. **Python Agent** fetches weather data and loads freight records from `data/mock_freight_data.json` every 10 minutes, registering each arrival via `register_actual_arrival`.
 
 3. **Evaluator Agent** checks for:
    
