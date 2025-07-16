@@ -86,6 +86,7 @@ payout transactions via Soroban RPC:
 ```
 SOROBAN_RPC_URL=<rpc endpoint>
 CONTRACT_ID=<deployed contract id>
+EXPLORER_URL=<optional explorer base URL>
 ```
 
 ## Files
