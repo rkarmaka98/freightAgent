@@ -29,6 +29,13 @@ class TriggerAgent:
         data = resp.json()
         return data.get("result") == "success"
 
+    def register_actual_arrival(self, record: Dict) -> None:
+        """Simulate calling the `register_actual_arrival` contract method."""
+        ship_id = record["ship_id"]
+        actual = record["actual_eta"]
+        # In a real system, this would send a transaction to the Soroban contract
+        print(f"Recorded arrival for {ship_id} at {actual}")
+
     def trigger_payout(self, record: Dict) -> bool:
         """Send the transaction and return True if it succeeded."""
         ship_id = record["ship_id"]
