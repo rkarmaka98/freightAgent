@@ -39,7 +39,7 @@
 
 ### Agent Modules
 
-- [ ] Build `DataAgent` to fetch ETA & weather data (OpenWeatherMap)
+- [ ] Build `DataAgent` to fetch ETA & weather data (Met Éireann)
 - [ ] Build `EvaluatorAgent` to:
   - Compare actual ETA vs expected
   - Compare wind speed against threshold
