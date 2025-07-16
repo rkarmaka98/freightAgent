@@ -78,6 +78,16 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
+### RPC Configuration
+
+Set the following environment variables so `TriggerAgent` can submit
+payout transactions via Soroban RPC:
+
+```
+SOROBAN_RPC_URL=<rpc endpoint>
+CONTRACT_ID=<deployed contract id>
+```
+
 ## Files
 
 - `agents/data_agent.py`
