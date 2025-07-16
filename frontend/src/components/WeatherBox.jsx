@@ -24,11 +24,11 @@ export default function WeatherBox() {
   return (
     <div className="weather-box">
       {weather ? (
-        <p>
+        <p className="caption">
           Wind: {weather.wind_speed} kts, Conditions: {weather.conditions}
         </p>
       ) : (
-        <p>No weather data</p>
+        <p className="caption">No weather data</p>
       )}
     </div>
   );
