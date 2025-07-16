@@ -33,6 +33,15 @@ impl FreightInsurance {
         p.set(&DataKey::PayoutDone(ship_id), &false);
     }
 
+    /// Store the actual arrival timestamp for a ship.
+    /// Also trigger payout check immediately after saving.
+    pub fn register_actual_arrival(env: Env, ship_id: BytesN<32>, actual_eta: u64) {
+        let p = env.storage().persistent();
+        p.set(&DataKey::ActualEta(ship_id.clone()), &actual_eta);
+        // Automatically evaluate payout conditions when arrival is recorded
+        let _ = Self::check_and_payout(env, ship_id);
+    }
+
     pub fn check_and_payout(env: Env, ship_id: BytesN<32>) -> bool {
         let p = env.storage().persistent();
         let expected: u64 = p.get(&DataKey::ExpectedEta(ship_id.clone())).unwrap();

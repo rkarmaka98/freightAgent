@@ -33,6 +33,8 @@ def monitor() -> None:
         # Only evaluate if a policy exists for the ship
         if ship_id not in policies:
             continue
+        # Persist actual arrival on-chain
+        _trigger.register_actual_arrival(rec)
         should_trigger = _evaluator.evaluate(rec)
         _logger.log(rec, should_trigger)
         if should_trigger and ship_id not in _trigger.payout_log:
