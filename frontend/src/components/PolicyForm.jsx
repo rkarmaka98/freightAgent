@@ -46,6 +46,7 @@ export default function PolicyForm() {
             onChange={(e) => setExpectedEta(e.target.value)}
           />
         </div>
+        {/* button labeled for screen readers */}
         <button type="submit" aria-label="Submit new policy">Submit</button>
       </fieldset>
       {/* status message announced politely to screen readers */}

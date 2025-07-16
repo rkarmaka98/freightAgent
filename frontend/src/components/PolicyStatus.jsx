@@ -25,7 +25,8 @@ export default function PolicyStatus() {
   }, []);
 
   return (
-    <div className="policy-status" aria-busy={loading}>
+    // list of policies displayed as its own region
+    <section className="policy-status" aria-busy={loading} aria-label="Policy status list">
       <h2>Current Policies</h2>
       {loading ? (
         <p>Loading...</p>
@@ -38,6 +39,6 @@ export default function PolicyStatus() {
           ))}
         </ul>
       )}
-    </div>
+    </section>
   );
 }
