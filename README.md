@@ -1,8 +1,8 @@
-# Parametric Freight Insurance with Agentic AI & Smart Contracts
+# Parametric Freight Insurance with Agentic & Smart Contracts
 
 This project is a prototype parametric insurance system built with:
 
-- **Python Agentic AI** workflow for real-time monitoring
+- **Python Agentic** workflow for real-time monitoring
 - **Rust + Soroban smart contracts** for on-chain policy and payouts
 - **React Frontend** for real-time user interaction
 
