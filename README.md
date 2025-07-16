@@ -20,6 +20,8 @@ The system automates insurance payouts for delayed freight shipments or risky we
 | Blockchain     | Stellar Testnet + Soroban      |
 | Data Sources   | Freight data from `data/mock_freight_data.json`, weather live via Met Éireann API |
 
+Weather data is fetched from the Met Éireann API by the DataAgent.
+
 ---
 
 ## Core Concepts
