@@ -66,7 +66,7 @@
 - [ ] `StatusDisplay.jsx` to show current ETA, delay, and status
 - [ ] `WeatherBox.jsx` to show wind speed and other weather data
 - [ ] `RiskAlertBanner.jsx` to display live warnings and payouts
-- [ ] `TxLog.jsx` to show blockchain transaction hashes
+- [ ] `TxLog.jsx` to show policy labels, status badges and explorer link
 
 ### API Integration
 

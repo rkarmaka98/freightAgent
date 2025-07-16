@@ -132,7 +132,7 @@ Soroban (Rust Contracts)  <--------RPC--------->  Python Contract Invoker
 
 - Python updates frontend via WebSocket or `GET /status`
 
-- UI shows green success banner + Tx hash in `TxLog`
+- UI shows green success banner and policy-labeled transactions in `TxLog`
 
 ## Agentic Intelligence Upgrade
 
