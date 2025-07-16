@@ -30,6 +30,24 @@ with open("../data/mock_freight_data.json") as f:
     FREIGHT_DATA = json.load(f)  # list of ship records
 ```
 
+## Fetching Weather from Met Éireann
+
+Use `requests` to query the Met Éireann API. The service endpoint and API key
+should be set via the `MET_EIREANN_ENDPOINT` and `MET_EIREANN_API_KEY`
+environment variables.
+
+```python
+import os
+import requests  # call the weather API
+
+endpoint = os.environ["MET_EIREANN_ENDPOINT"]
+api_key = os.environ["MET_EIREANN_API_KEY"]
+
+resp = requests.get(endpoint, params={"api_key": api_key})
+data = resp.json()
+wind_speed = data["wind"]["speed"]  # parse wind data
+```
+
 ---
 
 ## REST API (FastAPI)
