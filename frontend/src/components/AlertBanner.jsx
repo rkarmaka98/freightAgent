@@ -23,7 +23,7 @@ export default function AlertBanner() {
   }, []);
 
   return (
-    <div className="alert-banner">
+    <div className="alert-banner" role="alert">
       {alert && <p>{alert}</p>}
     </div>
   );

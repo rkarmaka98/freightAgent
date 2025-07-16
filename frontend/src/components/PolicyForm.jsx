@@ -26,24 +26,34 @@ export default function PolicyForm() {
 
   return (
     <form className="policy-form" onSubmit={handleSubmit}>
-      <h2>Create Policy</h2>
-      <div>
-        <label>Ship ID:</label>
-        <input
-          value={shipId}
-          onChange={(e) => setShipId(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Expected ETA:</label>
-        <input
-          type="datetime-local"
-          value={expectedEta}
-          onChange={(e) => setExpectedEta(e.target.value)}
-        />
-      </div>
-      <button type="submit">Submit</button>
-      {message && <p>{message}</p>}
+      {/* legend and semantic grouping for accessibility */}
+      <fieldset>
+        <legend>Create Policy</legend>
+        <div>
+          <label htmlFor="shipId">Ship ID:</label>
+          <input
+            id="shipId"
+            value={shipId}
+            onChange={(e) => setShipId(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="eta">Expected ETA:</label>
+          <input
+            id="eta"
+            type="datetime-local"
+            value={expectedEta}
+            onChange={(e) => setExpectedEta(e.target.value)}
+          />
+        </div>
+        <button type="submit" aria-label="Submit new policy">Submit</button>
+      </fieldset>
+      {/* status message announced politely to screen readers */}
+      {message && (
+        <p role="status" aria-live="polite">
+          {message}
+        </p>
+      )}
     </form>
   );
 }

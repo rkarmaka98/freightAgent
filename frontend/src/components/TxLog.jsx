@@ -22,13 +22,13 @@ export default function TxLog() {
   }, []);
 
   return (
-    <div className="tx-log">
+    <section className="tx-log" aria-label="Transaction log">
       <h2>Transaction Log</h2>
       <ul>
         {logs.map((l, i) => (
           <li key={i}>{l}</li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }

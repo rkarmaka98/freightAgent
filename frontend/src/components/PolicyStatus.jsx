@@ -25,7 +25,7 @@ export default function PolicyStatus() {
   }, []);
 
   return (
-    <div className="policy-status">
+    <div className="policy-status" aria-busy={loading}>
       <h2>Current Policies</h2>
       {loading ? (
         <p>Loading...</p>

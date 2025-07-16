@@ -22,7 +22,7 @@ export default function WeatherBox() {
   }, []);
 
   return (
-    <div className="weather-box">
+    <section className="weather-box" aria-label="Weather information">
       {weather ? (
         <p>
           Wind: {weather.wind_speed} kts, Conditions: {weather.conditions}
@@ -30,6 +30,6 @@ export default function WeatherBox() {
       ) : (
         <p>No weather data</p>
       )}
-    </div>
+    </section>
   );
 }

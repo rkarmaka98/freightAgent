@@ -1,0 +1,68 @@
+/* Base colors with 4.5:1 contrast */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #0053a6; /* contrast ratio > 7 */
+}
+
+/* Dark theme overrides */
+[data-theme='dark'] {
+  --background-color: #121212;
+  --text-color: #f5f5f5;
+  --primary-color: #8ab4f8;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: sans-serif;
+}
+
+button,
+input {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+}
+
+button:focus,
+input:focus {
+  outline: 2px solid var(--primary-color);
+}
+
+/* container spacing */
+.App {
+  padding: 1rem;
+}
+
+/* mobile breakpoint */
+@media (max-width: 600px) {
+  .App {
+    font-size: 1rem;
+  }
+}
+
+/* tablet breakpoint */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .App {
+    max-width: 80%;
+    margin: auto;
+    font-size: 1.1rem;
+  }
+}
+
+/* desktop breakpoint */
+@media (min-width: 1025px) {
+  .App {
+    max-width: 60%;
+    margin: auto;
+    font-size: 1.2rem;
+  }
+}
