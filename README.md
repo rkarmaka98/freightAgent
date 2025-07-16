@@ -18,7 +18,9 @@ The system automates insurance payouts for delayed freight shipments or risky we
 | Agentic AI     | Python (FastAPI + scheduler)   |
 | Frontend       | React + Vite                   |
 | Blockchain     | Stellar Testnet + Soroban      |
-| Data Sources   | Met Eireann, `data/mock_freight_data.json` |
+| Data Sources   | Met Éireann API, `data/mock_freight_data.json` |
+
+Weather data is fetched from the Met Éireann API by the DataAgent.
 
 ---
 
