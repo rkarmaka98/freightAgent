@@ -1,5 +1,6 @@
 """FastAPI server orchestrating the agentic workflow."""
 from fastapi import FastAPI
+import asyncio
 from apscheduler.schedulers.background import BackgroundScheduler
 from typing import Dict, List
 
@@ -44,7 +45,7 @@ def start_scheduler() -> None:
 
 
 @app.post("/policy")
-def create_policy(policy: Dict) -> Dict:
+async def create_policy(policy: Dict) -> Dict:
     """Store a new policy; expects at least a `ship_id` field."""
     ship_id = policy.get("ship_id")
     if not ship_id:
@@ -54,7 +55,7 @@ def create_policy(policy: Dict) -> Dict:
 
 
 @app.get("/status")
-def get_status() -> List[Dict]:
+async def get_status() -> List[Dict]:
     """Return current policies and payout logs."""
     return [
         {"ship_id": sid, "policy": pol, "payout": sid in _trigger.payout_log}
@@ -63,7 +64,8 @@ def get_status() -> List[Dict]:
 
 
 @app.post("/manual-check")
-def manual_check() -> Dict:
-    """Manually run the monitor step."""
-    monitor()
+async def manual_check() -> Dict:
+    """Manually run the monitor step without blocking the event loop."""
+    # monitor() performs I/O and CPU work; offload to a thread to keep FastAPI async
+    await asyncio.to_thread(monitor)
     return {"checked": True}
