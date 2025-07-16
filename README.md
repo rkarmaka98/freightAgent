@@ -18,7 +18,7 @@ The system automates insurance payouts for delayed freight shipments or risky we
 | Agentic AI     | Python (FastAPI + scheduler)   |
 | Frontend       | React + Vite                   |
 | Blockchain     | Stellar Testnet + Soroban      |
-| Data Sources   | Met Eireann, `data/mock_freight_data.json` |
+| Data Sources   | Freight data from `data/mock_freight_data.json`, weather live via Met Éireann API |
 
 ---
 
@@ -39,6 +39,11 @@ The system automates insurance payouts for delayed freight shipments or risky we
    - [`agentic/README.md`](agentic/README.md)
    - [`frontend/README.md`](frontend/README.md)
 3. Run all services and demo your live workflow
+
+After starting the backend, the **DataAgent** loads freight records locally from
+`data/mock_freight_data.json` while fetching current weather from the Met
+Éireann API. This mix of local and live data keeps the demo self-contained yet
+realistic.
 
 ---
 
