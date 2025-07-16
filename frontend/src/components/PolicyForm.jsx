@@ -25,36 +25,27 @@ export default function PolicyForm() {
   };
 
   return (
-    <form className="policy-form" onSubmit={handleSubmit}>
-      {/* legend and semantic grouping for accessibility */}
-      <fieldset>
-        <legend>Create Policy</legend>
-        <div>
-          <label htmlFor="shipId">Ship ID:</label>
-          <input
-            id="shipId"
-            value={shipId}
-            onChange={(e) => setShipId(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="eta">Expected ETA:</label>
-          <input
-            id="eta"
-            type="datetime-local"
-            value={expectedEta}
-            onChange={(e) => setExpectedEta(e.target.value)}
-          />
-        </div>
-        {/* button labeled for screen readers */}
-        <button type="submit" aria-label="Submit new policy">Submit</button>
-      </fieldset>
-      {/* status message announced politely to screen readers */}
-      {message && (
-        <p role="status" aria-live="polite">
-          {message}
-        </p>
-      )}
+    <form className="policy-form space-y-2" onSubmit={handleSubmit}>
+      <h2 className="mb-2">Create Policy</h2>
+      <div className="flex flex-col">
+        <label className="caption">Ship ID:</label>
+        <input
+          className="border p-1"
+          value={shipId}
+          onChange={(e) => setShipId(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-col">
+        <label className="caption">Expected ETA:</label>
+        <input
+          className="border p-1"
+          type="datetime-local"
+          value={expectedEta}
+          onChange={(e) => setExpectedEta(e.target.value)}
+        />
+      </div>
+      <button className="bg-primary text-white px-2 py-1" type="submit">Submit</button>
+      {message && <p className="caption">{message}</p>}
     </form>
   );
 }

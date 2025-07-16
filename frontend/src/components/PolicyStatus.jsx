@@ -25,15 +25,14 @@ export default function PolicyStatus() {
   }, []);
 
   return (
-    // list of policies displayed as its own region
-    <section className="policy-status" aria-busy={loading} aria-label="Policy status list">
-      <h2>Current Policies</h2>
+    <div className="policy-status space-y-2">
+      <h2 className="mb-2">Current Policies</h2>
       {loading ? (
-        <p>Loading...</p>
+        <p className="caption">Loading...</p>
       ) : (
-        <ul>
+        <ul className="list-disc pl-5">
           {statuses.map((s) => (
-            <li key={s.ship_id}>
+            <li key={s.ship_id} className="caption">
               {s.ship_id}: {s.payout ? 'Payout Triggered' : 'Active'}
             </li>
           ))}
