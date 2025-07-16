@@ -28,6 +28,7 @@ policies: Dict[str, Dict] = {}
 def monitor() -> None:
     """Periodic job to evaluate all known shipments."""
     records = _data_agent.fetch_latest()
+    to_payout = []
     for rec in records:
         ship_id = rec["ship_id"]
         # Only evaluate if a policy exists for the ship
@@ -38,11 +39,9 @@ def monitor() -> None:
         should_trigger = _evaluator.evaluate(rec)
         _logger.log(rec, should_trigger)
         if should_trigger and ship_id not in _trigger.payout_log:
-            success = _trigger.trigger_payout(rec)
-            if success:
-                print(f"Payout transaction succeeded for {ship_id}")
-            else:
-                print(f"Payout transaction failed for {ship_id}")
+            to_payout.append(rec)
+    if to_payout:
+        _trigger.trigger_payout_batch(to_payout)
 
 
 @app.on_event("startup")
@@ -75,6 +74,19 @@ async def get_status() -> List[Dict]:
     return [
         {"ship_id": sid, "policy": pol, "payout": sid in _trigger.payout_log}
         for sid, pol in policies.items()
+    ]
+
+
+@app.get("/txlog")
+async def tx_log() -> List[Dict]:
+    """Expose transaction history with friendly labels."""
+    return [
+        {
+            "label": f"Policy #{tx['ship_id']}",
+            "status": tx["status"],
+            "explorer": f"{_trigger.explorer_url}/{tx['tx_id']}" if _trigger.explorer_url else None,
+        }
+        for tx in _trigger.transactions
     ]
 
 
