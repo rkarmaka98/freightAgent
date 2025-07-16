@@ -1,0 +1,12 @@
+.dashboard-grid {
+  display: grid;
+  gap: 8px; /* 8px grid spacing */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 16px; /* 2 * 8px for top spacing */
+}
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px; /* 2 * 8px for internal spacing */
+  background: #fff;
+}

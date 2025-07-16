@@ -24,7 +24,7 @@ export default function AlertBanner() {
 
   return (
     <div className="alert-banner">
-      {alert && <p>{alert}</p>}
+      {alert && <p className="caption text-accent font-semibold">{alert}</p>}
     </div>
   );
 }
