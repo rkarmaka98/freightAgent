@@ -38,6 +38,6 @@ export default function PolicyStatus() {
           ))}
         </ul>
       )}
-    </div>
+    </section>
   );
 }

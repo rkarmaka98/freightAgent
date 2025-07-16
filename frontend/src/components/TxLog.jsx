@@ -29,6 +29,6 @@ export default function TxLog() {
           <li key={i} className="caption">{l}</li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
