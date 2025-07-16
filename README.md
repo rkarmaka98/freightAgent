@@ -48,6 +48,7 @@ After starting the backend, the **DataAgent** loads freight records locally from
 realistic.
 
 ---
+<img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/ad1a653e-06ec-4b94-b4ff-79fd677328b8" />
 
 ## Project Structure
 
