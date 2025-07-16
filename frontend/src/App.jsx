@@ -4,6 +4,7 @@ import PolicyStatus from './components/PolicyStatus';
 import WeatherBox from './components/WeatherBox';
 import AlertBanner from './components/AlertBanner';
 import TxLog from './components/TxLog';
+import Dashboard from './components/Dashboard';
 
 // Simple layout referencing all components
 export default function App() {
@@ -15,6 +16,8 @@ export default function App() {
       <PolicyStatus />
       <WeatherBox />
       <TxLog />
+      {/* analytics dashboard with charts and map */}
+      <Dashboard />
     </div>
   );
 }
