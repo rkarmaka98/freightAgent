@@ -1,5 +1,6 @@
 """FastAPI server orchestrating the agentic workflow."""
 from fastapi import FastAPI
+import asyncio
 from apscheduler.schedulers.background import BackgroundScheduler
 from typing import Dict, List
 
@@ -11,6 +12,9 @@ from agents.logger_agent import LoggerAgent
 DATA_PATH = "../data/mock_freight_data.json"
 
 app = FastAPI(title="Freight Insurance Agentic API")
+
+# Module-level scheduler so it can be reused across events
+scheduler = BackgroundScheduler()
 
 # Initialize agents
 _data_agent = DataAgent(DATA_PATH)
@@ -38,13 +42,19 @@ def monitor() -> None:
 @app.on_event("startup")
 def start_scheduler() -> None:
     """Launch background scheduler when the app starts."""
-    scheduler = BackgroundScheduler()
+    # Use the module-level scheduler defined above
     scheduler.add_job(monitor, "interval", minutes=10)
     scheduler.start()
 
 
+@app.on_event("shutdown")
+def shutdown_scheduler() -> None:
+    """Shut down the scheduler gracefully on shutdown."""
+    scheduler.shutdown()
+
+
 @app.post("/policy")
-def create_policy(policy: Dict) -> Dict:
+async def create_policy(policy: Dict) -> Dict:
     """Store a new policy; expects at least a `ship_id` field."""
     ship_id = policy.get("ship_id")
     if not ship_id:
@@ -54,7 +64,7 @@ def create_policy(policy: Dict) -> Dict:
 
 
 @app.get("/status")
-def get_status() -> List[Dict]:
+async def get_status() -> List[Dict]:
     """Return current policies and payout logs."""
     return [
         {"ship_id": sid, "policy": pol, "payout": sid in _trigger.payout_log}
@@ -63,7 +73,8 @@ def get_status() -> List[Dict]:
 
 
 @app.post("/manual-check")
-def manual_check() -> Dict:
-    """Manually run the monitor step."""
-    monitor()
+async def manual_check() -> Dict:
+    """Manually run the monitor step without blocking the event loop."""
+    # monitor() performs I/O and CPU work; offload to a thread to keep FastAPI async
+    await asyncio.to_thread(monitor)
     return {"checked": True}
