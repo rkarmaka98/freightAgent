@@ -50,33 +50,6 @@ realistic.
 ---
 <img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/ad1a653e-06ec-4b94-b4ff-79fd677328b8" />
 
-## Project Structure
-
-parametric-insurance/  
-│  
-├── contracts/ # Soroban Rust contract logic  
-│   └── Cargo.toml
-│   └── src/lib.rs
-├── agentic/ # Python AI agents + backend API  
-│   └── agents/
-│   └── api.py
-│   └── utils/
-├── frontend/ # React UI with live alerts  
-│   └── components/
-│   └── pages/
-├── data/
-│   └── mock_freight_data.json # sample shipping records
-├── .env                  # API keys
-└── README.md # Project overview
-
-The agents load this dataset using the Python `json` module:
-
-```python
-import json
-
-with open("data/mock_freight_data.json") as f:
-    FREIGHT_DATA = json.load(f)  # list of ship records
-```
 
 ---
 
