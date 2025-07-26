@@ -6,7 +6,7 @@ export default function AlertBanner() {
   // message displayed when a payout has occurred
   const [alert, setAlert] = useState('');
 
-  // check backend for any triggered payouts
+  // check backend for any triggered payouts on a regular interval
   useEffect(() => {
     async function checkPayouts() {
       try {
@@ -19,7 +19,11 @@ export default function AlertBanner() {
         console.error('Alert fetch failed', err);
       }
     }
+
+    // run once immediately then every 5 seconds; consider WebSocket push later
     checkPayouts();
+    const id = setInterval(checkPayouts, 5000);
+    return () => clearInterval(id); // cleanup on unmount
   }, []);
 
   return (

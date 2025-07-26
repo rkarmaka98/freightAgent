@@ -7,7 +7,7 @@ export default function PolicyStatus() {
   const [statuses, setStatuses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // fetch status information when component mounts
+  // fetch status information when component mounts and poll regularly
   useEffect(() => {
     async function fetchStatus() {
       try {
@@ -21,7 +21,12 @@ export default function PolicyStatus() {
         setLoading(false);
       }
     }
+
+    // initial fetch
     fetchStatus();
+    // poll every 5 seconds; replace with WebSocket if backend supports it
+    const id = setInterval(fetchStatus, 5000);
+    return () => clearInterval(id); // cleanup when component unmounts
   }, []);
 
   return (
