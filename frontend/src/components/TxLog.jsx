@@ -19,7 +19,8 @@ export default function TxLog() {
   }, []);
 
   return (
-    <div className="tx-log space-y-2">
+    // allow full width in responsive layouts
+    <div className="tx-log space-y-2 w-full">
       <h2 className="mb-2">Transaction Log</h2>
       <ul className="list-disc pl-5">
         {logs.map((l, i) => (

@@ -68,14 +68,15 @@ export default function App() {
         </div>
       </div>
 
-      {/* form and status side by side when space allows */}
-      <div className="sections-grid">
+      {/* form and status stack on small screens via Tailwind classes */}
+      <div className="grid gap-4 md:grid-cols-2 mt-4 w-full">
         <PolicyForm />
         <PolicyStatus />
       </div>
 
       {/* additional information sections */}
       <WeatherBox />
+      {/* log section below other content on mobile */}
       <TxLog />
     </DashboardLayout>
   );

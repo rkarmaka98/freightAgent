@@ -30,15 +30,24 @@ export default function PolicyStatus() {
   }, []);
 
   return (
-    <div className="policy-status space-y-2">
+    // width set so layout grid can control sizing
+    <div className="policy-status space-y-2 w-full">
       <h2 className="mb-2">Current Policies</h2>
       {loading ? (
         <p className="caption">Loading...</p>
       ) : (
         <ul className="list-disc pl-5">
           {statuses.map((s) => (
-            <li key={s.ship_id} className="caption">
-              {s.ship_id}: {s.payout ? 'Payout Triggered' : 'Active'}
+            <li key={s.ship_id} className="caption flex items-center space-x-2">
+              <span>{s.ship_id}</span>
+              {/* badge displays policy state */}
+              <span
+                className={`px-1 rounded text-xs ${
+                  s.payout ? 'bg-red-200 text-red-800' : 'bg-green-200 text-green-800'
+                }`}
+              >
+                {s.payout ? 'Payout Triggered' : 'Active'}
+              </span>
             </li>
           ))}
         </ul>
