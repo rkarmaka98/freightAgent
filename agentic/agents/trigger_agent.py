@@ -8,7 +8,7 @@ import requests
 class TriggerAgent:
     """Invoke the `check_and_payout` method on-chain."""
 
-    def __init__(self, rpc_url: Optional[str] = None, contract_id: Optional[str] = None) -> None:
+    def __init__(self, rpc_url: Optional[str] = None, contract_id: Optional[str] = None, explorer_url: Optional[str] = None) -> None:
         """Initialize connection details and local state."""
         # RPC endpoint for the Soroban network
         self.rpc_url = rpc_url or os.getenv("SOROBAN_RPC_URL", "http://localhost:8000")
@@ -19,12 +19,21 @@ class TriggerAgent:
         # Track each submitted transaction for the UI
         self.transactions: List[Dict] = []
         # Optional explorer base URL so users can view the tx on-chain
-        self.explorer_url = os.getenv("EXPLORER_URL", "")
+        # defaults to the EXPLORER_URL env var so deployments can configure it
+        self.explorer_url = explorer_url or os.getenv("EXPLORER_URL", "")
 
     def _record_tx(self, ship_id: str) -> str:
         """Create a local transaction entry and return its ID."""
         tx_id = f"tx-{ship_id}-{int(datetime.utcnow().timestamp())}"
-        self.transactions.append({"ship_id": ship_id, "tx_id": tx_id, "status": "pending"})
+        # include policy_id for clarity and a link to the explorer if configured
+        explorer_link = f"{self.explorer_url}/{tx_id}" if self.explorer_url else None
+        self.transactions.append({
+            "ship_id": ship_id,
+            "policy_id": ship_id,
+            "tx_id": tx_id,
+            "status": "pending",
+            "explorer": explorer_link,
+        })
         return tx_id
 
     def _update_tx_status(self, tx_id: str, status: str) -> None:

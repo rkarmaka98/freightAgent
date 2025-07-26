@@ -34,7 +34,7 @@ export default function TxLog() {
                   : 'bg-red-200'
               }`}
             >
-              {l.status}
+              {l.status === 'confirmed' ? 'Payout Confirmed' : l.status}
             </span>
             {l.explorer && (
               <a
@@ -43,7 +43,7 @@ export default function TxLog() {
                 rel="noopener noreferrer"
                 className="underline text-xs"
               >
-                View
+                View on Explorer
               </a>
             )}
           </li>

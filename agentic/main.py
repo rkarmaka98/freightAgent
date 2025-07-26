@@ -100,9 +100,11 @@ async def tx_log() -> List[Dict]:
     """Expose transaction history with friendly labels."""
     return [
         {
-            "label": f"Policy #{tx['ship_id']}",
+            "policy_id": tx.get("policy_id", tx.get("ship_id")),
+            "label": f"Policy #{tx.get('policy_id', tx.get('ship_id'))}",
             "status": tx["status"],
-            "explorer": f"{_trigger.explorer_url}/{tx['tx_id']}" if _trigger.explorer_url else None,
+            # explorer link already stored in the transaction entry
+            "explorer": tx.get("explorer"),
         }
         for tx in _trigger.transactions
     ]
