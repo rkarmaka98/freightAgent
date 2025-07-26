@@ -49,7 +49,8 @@ export default function PolicyForm() {
   };
 
   return (
-    <form className="policy-form space-y-2" onSubmit={handleSubmit}>
+    // full width so it stacks cleanly in responsive grid
+    <form className="policy-form space-y-2 w-full" onSubmit={handleSubmit}>
       <h2 className="mb-2">Create Policy</h2>
       <div className="flex flex-col">
         <label className="caption">Ship ID:</label>

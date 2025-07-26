@@ -28,7 +28,12 @@ export default function AlertBanner() {
 
   return (
     <div className="alert-banner">
-      {alert && <p className="caption text-accent font-semibold">{alert}</p>}
+      {alert && (
+        // alert uses accent color background for visibility
+        <p className="caption inline-block bg-accent text-white px-2 py-1 rounded">
+          {alert}
+        </p>
+      )}
     </div>
   );
 }
