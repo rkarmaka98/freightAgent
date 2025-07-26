@@ -42,10 +42,43 @@ input:focus {
   padding: 1rem;
 }
 
+/* layout wrapper with optional sidebar */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+.dashboard-layout .content {
+  flex: 1;
+  padding: 1rem;
+}
+.sidebar {
+  background: var(--background-color);
+  border-right: 1px solid #ccc;
+}
+.sidebar.collapsed ul {
+  display: none;
+}
+
+/* add consistent spacing for main sections */
+.policy-form,
+.policy-status,
+.weather-box,
+.tx-log {
+  margin-bottom: 1rem;
+}
+
 /* Mobile breakpoint */
 @media (max-width: 600px) {
   .App {
     font-size: 1rem;
+  }
+  .dashboard-layout {
+    flex-direction: column; /* stack sidebar */
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
   }
 }
 
@@ -64,5 +97,8 @@ input:focus {
     max-width: 60%;
     margin: auto;
     font-size: 1.2rem;
+  }
+  .sidebar {
+    width: 200px; /* fixed width on larger screens */
   }
 }

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
+// layout and section components
+import DashboardLayout from './components/DashboardLayout';
+import PolicyForm from './components/PolicyForm';
+import PolicyStatus from './components/PolicyStatus';
+import WeatherBox from './components/WeatherBox';
+import AlertBanner from './components/AlertBanner';
+import TxLog from './components/TxLog';
 
 // simple utility fetches policy status so we can calculate metrics
 
@@ -34,9 +41,15 @@ export default function App() {
   ).length;
 
   return (
-    <div className="App">
-
+    // use layout with sidebar for a consistent dashboard view
+    <DashboardLayout>
+      {/* page heading */}
       <h1>Freight Insurance Dashboard</h1>
+
+      {/* alert banner shows payout notifications */}
+      <AlertBanner />
+
+      {/* quick metrics on top of the page */}
       <div className="dashboard-grid">
         {/* card displaying active policy count */}
         <div className="card">
@@ -54,6 +67,16 @@ export default function App() {
           <p>{weatherAlerts}</p>
         </div>
       </div>
-    </div>
+
+      {/* form and status side by side when space allows */}
+      <div className="sections-grid">
+        <PolicyForm />
+        <PolicyStatus />
+      </div>
+
+      {/* additional information sections */}
+      <WeatherBox />
+      <TxLog />
+    </DashboardLayout>
   );
 }
