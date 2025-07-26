@@ -10,3 +10,15 @@
   padding: 16px; /* 2 * 8px for internal spacing */
   background: #fff;
 }
+
+/* grid container for form and status sections */
+.sections-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .sections-grid {
+    grid-template-columns: 1fr 1fr; /* side by side on wide screens */
+  }
+}
