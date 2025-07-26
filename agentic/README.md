@@ -78,6 +78,15 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
+### Weather API Configuration
+
+Set these environment variables so `DataAgent` can pull data from Met Éireann:
+
+```
+MET_EIREANN_ENDPOINT=<weather api base url>
+MET_EIREANN_API_KEY=<api key>
+```
+
 ### RPC Configuration
 
 Set the following environment variables so `TriggerAgent` can submit
