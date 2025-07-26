@@ -60,11 +60,29 @@ def shutdown_scheduler() -> None:
 
 @app.post("/policy")
 async def create_policy(policy: Dict) -> Dict:
-    """Store a new policy; expects at least a `ship_id` field."""
+    """Store a new policy; requires delay threshold, owner and payout."""
     ship_id = policy.get("ship_id")
+    delay = policy.get("delay_threshold")
+    owner = policy.get("owner")
+    payout = policy.get("payout_amount")
     if not ship_id:
         return {"error": "ship_id required"}
-    policies[ship_id] = policy
+    if delay is None or owner is None or payout is None:
+        return {"error": "missing fields"}
+    # numeric validation
+    try:
+        delay = int(delay)
+        payout = float(payout)
+    except ValueError:
+        return {"error": "invalid numeric values"}
+
+    policies[ship_id] = {
+        "ship_id": ship_id,
+        "expected_eta": policy.get("expected_eta"),
+        "delay_threshold": delay,
+        "owner": owner,
+        "payout_amount": payout,
+    }
     return {"status": "created", "ship_id": ship_id}
 
 
